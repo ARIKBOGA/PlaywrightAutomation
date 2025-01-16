@@ -43,3 +43,9 @@ trace.zip
 
 # Optional npm cache directory
 .npm/
+
+
+# Trace files
+*.zip
+*.trc
+*.trace
