@@ -1,10 +1,21 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
 
-test("has title", async ({ page, context }) => {
+let browserContext;
+let page;
+test.beforeAll(async ({ browser }) => {
   // Start tracing
-  await context.tracing.start({ screenshots: true, snapshots: true });
+  browserContext = await browser.newContext();
+  await browserContext.tracing.start({ screenshots: true, snapshots: true });
+  page = await browserContext.newPage();
+});
 
+test.afterAll(async () => {
+  // Stop tracing
+  await browserContext.tracing.stop({ path: "example-test-trace_2.zip" });
+});
+
+test("has title", async () => {
   await page.goto("https://playwright.dev/");
 
   // Expect a title "to contain" a substring.
@@ -22,11 +33,9 @@ test("has title", async ({ page, context }) => {
   // Expect the URL contains intro.
   await expect(page).toHaveURL(/.*intro/);
 
-  // stop tracing
-  await context.tracing.stop({path: "example-test-trace.zip"});
 });
 
-test("get started link", async ({ page }) => {
+test("get started link", async () => {
   await page.goto("https://playwright.dev/");
 
   // Click the get started link.
