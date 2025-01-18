@@ -41,6 +41,9 @@ test("Selectors Demo", async ({ page }) => {
   // using data-test attribute
   await page.locator('[data-test="password"]').fill("secret_sauce");
   
+  // using text in css selector
+  const loginButton = page.locator(':has-text("Login")');
+  //await loginButton.click();
   // using css selector directly with id
   await page.locator('#login-button').click();
 
