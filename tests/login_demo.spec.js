@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { log } from "console";
 
 function getStringAfterColon(text) {
   const colonIndex = text.indexOf(": "); // Find the index of ": "
@@ -28,6 +29,28 @@ test("login test_1", async ({ page }) => {
 
   await page.getByRole("button", { name: "Login" }).click();
 
-  const element = page.getByRole('link', { name: 'Admin' });
+  const element = page.getByRole("link", { name: "Admin" });
   await expect(element).toBeVisible();
+});
+
+test("Login test Applitools.com", async ({ page }) => {
+  // Navigate to the page
+  await page.goto("https://demo.applitools.com/");
+  
+  // Fill in username and password
+  await page.getByPlaceholder("Enter your username").fill("username");
+  await page.getByPlaceholder("Enter your password").fill("password");
+  
+  // Click the "Sign in" button
+  await page.locator("text=Sign in").click();
+  
+  // Wait for the element to be visible
+  await page.waitForSelector(".element-header", { state: "visible" });
+  
+  // Verify the text content
+  const headerText = await page.locator(".element-header").first().textContent();
+  expect(headerText).toContain("Financial Overview");
+  
+  // Log the text content to the console
+  console.log(headerText);
 });
