@@ -1,13 +1,9 @@
 
 import { test, expect } from '@playwright/test';
-import { chromium } from '@playwright/test';
 
-test('Record Demo 2',async () => {
-  const browser = await chromium.launch({
-    headless: false
-  });
-  const context = await browser.newContext();
-  const page = await context.newPage();
+test('Record Demo 2',async ({page}) => {
+  
+  
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').click();
   await page.locator('[data-test="username"]').fill('standard_user');
@@ -21,9 +17,7 @@ test('Record Demo 2',async () => {
   await page.getByRole('button', { name: 'Open Menu' }).click();
   await page.locator('[data-test="logout-sidebar-link"]').click();
 
-  // ---------------------
-  await context.close();
-  await browser.close();
+
 });
 
 
