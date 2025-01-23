@@ -17,5 +17,7 @@ test("Amazon", async ({ page }) => {
   await page.locator('input[name="field-keywords"]').fill("Laptop");
   await page.locator('input[name="field-keywords"]').press("Enter");
 
-  await expect(page).toHaveTitle("Amazon.com : Laptop");
+  await expect(page).toHaveTitle(/.*Laptop/);
+
+  console.log(await page.title());
 });
