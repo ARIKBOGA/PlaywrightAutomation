@@ -27,7 +27,33 @@ test("Assertions TypeScript example", async ({ page }) => {
   await expect(page.locator("text=The Kitchen")).toBeVisible();
   await expect(page.locator("text=The Kitchen")).not.toBeHidden();
 
+  // soft assertion - will not stop the execution if the element is not visible
+  await expect.soft(page.locator("text=The Kitchen")).toBeHidden();
+
   // check if the element is enabled or disabled
   await expect(page.locator("text=The Kitchen")).toBeEnabled();
   await expect(page.locator("text=The Kitchen")).not.toBeDisabled();
+
+  // soft assertion - will not stop the execution if the element is not enabled
+  await expect.soft(page.locator("text=The Kitchen")).toBeDisabled();
+
+  // check text of the element
+  await expect(page.locator("text=The Kitchen")).toHaveText("The Kitchen");
+  await expect(page.locator("text=The Kitchen")).not.toHaveText("ABCDEF");
+
+  // check the attribute value of the element
+  await expect(page.locator("text=The Kitchen")).toHaveAttribute(
+    "class",
+    /.*css-dpmy2a/ // regex: class value should contain 'css-dpmy2a' starts with any value
+  );
+
+  // check the class value of the element
+  await expect(page.locator("text=The Kitchen")).toHaveClass(/.*css-dpmy2a/);
+
+  // check the url and title of the page
+  await expect(page).toHaveURL(/kitchen.applitools.com/);
+  await expect(page).toHaveTitle(/.*Kitchen/);
+
+  // visual validation
+  await expect(page).toHaveScreenshot();
 });
