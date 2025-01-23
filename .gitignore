@@ -49,3 +49,8 @@ trace.zip
 *.zip
 *.trc
 *.trace
+
+# screenshot files
+*.png
+**/*snapshots*
+**/*screenshots*
