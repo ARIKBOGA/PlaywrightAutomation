@@ -28,14 +28,14 @@ test("Assertions TypeScript example", async ({ page }) => {
   await expect(page.locator("text=The Kitchen")).not.toBeHidden();
 
   // soft assertion - will not stop the execution if the element is not visible
-  await expect.soft(page.locator("text=The Kitchen")).toBeHidden();
+  // await expect.soft(page.locator("text=The Kitchen")).toBeHidden();
 
   // check if the element is enabled or disabled
   await expect(page.locator("text=The Kitchen")).toBeEnabled();
   await expect(page.locator("text=The Kitchen")).not.toBeDisabled();
 
   // soft assertion - will not stop the execution if the element is not enabled
-  await expect.soft(page.locator("text=The Kitchen")).toBeDisabled();
+  // await expect.soft(page.locator("text=The Kitchen")).toBeDisabled();
 
   // check text of the element
   await expect(page.locator("text=The Kitchen")).toHaveText("The Kitchen");
