@@ -17,6 +17,10 @@ test("Amazon", async ({ page }) => {
   await page.locator('input[name="field-keywords"]').fill("Laptop");
   await page.locator('input[name="field-keywords"]').press("Enter");
 
+  // Wait for the page to load
+  await page.waitForLoadState("domcontentloaded");
+
+  // Check if the title contains the word "Laptop"
   await expect(page).toHaveTitle(/.*Laptop/);
 
   console.log(await page.title());
