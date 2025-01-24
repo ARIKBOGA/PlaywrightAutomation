@@ -34,7 +34,7 @@ module.exports = defineConfig({
     headless: true, // Ensure tests run in headless mode
     timeout: 2000, // Timeout set to 2 seconds
     video: "on",
-    launchOptions: {
+    launchOptions: {  // for slowMo, see https://playwright.dev/docs/api/class-browsertype
       slowMo: 1000, // Slow down the browser for better visibility
     },
   },
