@@ -54,3 +54,4 @@ trace.zip
 *.png
 **/*snapshots*
 **/*screenshots*
+**/*video*
