@@ -19,11 +19,10 @@ test("Slow motion video recording", async () => {
   // create a page
   const page = await context.newPage();
 
-  // Enable slow motion
-  // Amazon'a git
+  // Enable slow motion for the page
   await page.goto("https://www.amazon.com/");
 
-  // Pop-up kontrolü ve kapatma
+  // Pop-up check
   const alertSubmitButton = page
     .getByRole("button", { name: "Submit" })
     .first();
@@ -35,16 +34,16 @@ test("Slow motion video recording", async () => {
     console.log("Pop-up did not appear.");
   }
 
-  // Arama alanını bul ve doldur
+  // Search for a product
   const searchBox = page.locator('input[name="field-keywords"]');
   await searchBox.click();
   await searchBox.fill("Laptop");
   await searchBox.press("Enter");
 
-  // Sayfa yüklenmesini bekle
+  // Wait for the page to load
   await page.waitForLoadState("domcontentloaded");
 
-  // Başlığı kontrol et
+  // Assert the title of the page
   try {
     await expect(page).toHaveTitle(/.*Laptop/, { timeout: 10000 });
     console.log("Title check passed: ", await page.title());
@@ -54,7 +53,8 @@ test("Slow motion video recording", async () => {
     throw error;
   }
 
-  // Video kaydını durdur
+  // Close the browser
+  
   //await page.close();
   await context.close();
   //await browser.close();
