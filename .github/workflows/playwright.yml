@@ -17,11 +17,21 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Clean videos folder
+      run: rm -rf videos/  # Optional: Clean previous video files
     - name: Run Playwright tests
       run: npx playwright test
-    - uses: actions/upload-artifact@v4
+    - name: Upload Playwright Report
+      uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
+        retention-days: 30
+    - name: Upload videos
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: videos
+        path: videos/
         retention-days: 30
