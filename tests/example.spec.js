@@ -1,5 +1,7 @@
 // @ts-check
-const { test, expect } = require("@playwright/test");
+import { test, expect } from "@playwright/test";
+
+test.describe("All tests in this suite", () => {
 
 let browserContext;
 let page;
@@ -45,4 +47,6 @@ test("get started link", async () => {
   await expect(
     page.getByRole("heading", { name: "Installation" })
   ).toBeVisible();
+});
+
 });
