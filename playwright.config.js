@@ -1,6 +1,6 @@
 // @ts-check
-const { defineConfig, devices } = require("@playwright/test");
-const { on } = require("events");
+import { defineConfig, devices } from "@playwright/test";
+import { on } from "events";
 
 /**
  * Read environment variables from file.
@@ -11,7 +11,8 @@ const { on } = require("events");
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-module.exports = defineConfig({
+export default defineConfig({
+  globalSetup: './global-setup.js', // Global setup file to run before all tests
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -33,7 +34,7 @@ module.exports = defineConfig({
     trace: "on-first-retry",
     headless: true, // Ensure tests run in headless mode
     timeout: 2000, // Timeout set to 2 seconds
-    video: "on",
+    video: "retain-on-failure", // Record video for failed tests
     launchOptions: {  // for slowMo, see https://playwright.dev/docs/api/class-browsertype
       slowMo: 100, // Slow down the browser for better visibility
     },
